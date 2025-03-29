@@ -1,0 +1,110 @@
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-md) 0;
+    min-height: 400px;
+}
+
+.movie-slider {
+    display: flex;
+    gap: var(--spacing-md);
+    animation: slide 25s linear infinite;
+    will-change: transform;
+}
+
+.movie-slider.paused {
+    animation-play-state: paused;
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.movie {
+    width: clamp(150px, 18vw, 220px);
+    aspect-ratio: 2/3;
+    position: relative;
+    transition: transform var(--transition-normal);
+}
+
+.movie-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-slow);
+}
+
+.movie:hover .movie-card {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity var(--transition-normal);
+}
+
+.back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #ff5252, #ff8a80);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.back h2 {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.movie-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.movie-actions button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.play-btn {
+    background: var(--secondary-dark);
+    color: var(--text-dark);
+}
+
+.favorite-btn {
+    background: #ff5252;
+    color: var(--text-dark);
+}
+
+.favorite-btn.active {
+    background: #ffd740;
+}
+
+.movie-actions button:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-sm);
+}
